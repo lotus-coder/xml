@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Tratamiento XML</string>
+
+    <string name="ejer1">Ejercicio 1</string>
+    <string name="ejer2">Ejercicio 2</string>
+
+    <string name="cargar">Cargar</string>
+    <string name="pulsar">Pulse el botón de cargar para ver las noticias</string>
+
+    <string name="prepara">Predicción para…</string>
+    <string name="hoy">Hoy</string>
+    <string name="manana">Mañana</string>
+    <string name="pasado">Pasado mañana</string>
+    <string name="elija">Elige el día para mostrar datos</string>
+
+    <string name="fecha">Fecha:</string>
+    <string name="precipitacion">Prob. precipitacion:</string>
+    <string name="cotanieve">Cota nieve:</string>
+    <string name="cielo">Cielo:</string>
+    <string name="dirviento">Dirección del viento:</string>
+    <string name="racha">Racha:</string>
+    <string name="rachamax">Racha máxima:</string>
+    <string name="min">Temperatura mínima:</string>
+    <string name="max">Temperatura máxima:</string>
+</resources>
