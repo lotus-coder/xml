@@ -1,7 +1,5 @@
 package com.example.xml;
 
-import android.util.Log;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
@@ -31,9 +29,9 @@ public class RssParserDOMtemperatura {
         }
     }
 
-    public List<Temporal> parse() {
+    public List<Tiempo> parse() {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        List<Temporal> prediccion = new ArrayList<Temporal>();
+        List<Tiempo> prediccion = new ArrayList<Tiempo>();
 
         try {
             DocumentBuilder builder = factory.newDocumentBuilder();
@@ -43,7 +41,7 @@ public class RssParserDOMtemperatura {
             NodeList items = root.getElementsByTagName("dia");
 
             for (int i=0; i<items.getLength(); i++){
-                Temporal temporal = new Temporal();
+                Tiempo temporal = new Tiempo();
                 temporal.setCotanieve(-1);
 
                 Node dia = items.item(i);
@@ -51,20 +49,20 @@ public class RssParserDOMtemperatura {
                 NamedNodeMap fecha = dia.getAttributes();
                 temporal.setFecha(fecha.getNamedItem("fecha").getNodeValue());
 
-                NodeList datosTemporal = dia.getChildNodes();
+                NodeList datosTiempo = dia.getChildNodes();
 
-                for (int j=0; j<datosTemporal.getLength(); j++){
-                    Node dato = datosTemporal.item(j);
+                for (int j=0; j<datosTiempo.getLength(); j++){
+                    Node dato = datosTiempo.item(j);
                     String etiqueta = dato.getNodeName();
 
                     NamedNodeMap atributos = dato.getAttributes();
 
                     if (etiqueta.equals("prob_precipitacion")) {
-                        String texto = obtenerTexto(dato);
+                        String texto = dameTexto(dato);
                         if (texto.equals("")) temporal.setPrecipitacion(0);
                         else temporal.setPrecipitacion(Integer.parseInt(texto));
                     } else if (etiqueta.equals("cota_nieve_prov")) {
-                        String texto = obtenerTexto(dato);
+                        String texto = dameTexto(dato);
                         if (texto.equals("")) temporal.setCotanieve(0);
                         else temporal.setCotanieve(Integer.parseInt(texto));
                     } else if (etiqueta.equals("estado_cielo")) {
@@ -76,16 +74,16 @@ public class RssParserDOMtemperatura {
                             Node vientotag = viento.item(z);
                             String tag = vientotag.getNodeName();
                             if (tag.equals("direccion")) {
-                                String texto = obtenerTexto(vientotag);
+                                String texto = dameTexto(vientotag);
                                 temporal.setDirviento(texto);
                             } else if (tag.equals("velocidad")) {
-                                String texto = obtenerTexto(vientotag);
+                                String texto = dameTexto(vientotag);
                                 if (texto.equals("")) temporal.setFuerzaviento(0);
                                 else temporal.setFuerzaviento(Integer.parseInt(texto));
                             }
                         }
                     } else if (etiqueta.equals("racha_max")) {
-                        String texto = obtenerTexto(dato);
+                        String texto = dameTexto(dato);
                         if (texto.equals("")) temporal.setRachamax(0);
                         else temporal.setRachamax(Integer.parseInt(texto));
                     } else if (etiqueta.equals("temperatura")) {
@@ -94,11 +92,11 @@ public class RssParserDOMtemperatura {
                             Node temperaturatag = temperatura.item(z);
                             String tag = temperaturatag.getNodeName();
                             if (tag.equals("minima")) {
-                                String texto = obtenerTexto(temperaturatag);
+                                String texto = dameTexto(temperaturatag);
                                 if (texto.equals("")) temporal.setTempmin(0);
                                 else temporal.setTempmin(Integer.parseInt(texto));
                             } else if (tag.equals("maxima")) {
-                                String texto = obtenerTexto(temperaturatag);
+                                String texto = dameTexto(temperaturatag);
                                 if (texto.equals("")) temporal.setTempmax(0);
                                 else temporal.setTempmax(Integer.parseInt(texto));
                             }
@@ -119,7 +117,7 @@ public class RssParserDOMtemperatura {
 
     }
 
-    public String obtenerTexto (Node dato) {
+    public String dameTexto (Node dato) {
         StringBuilder texto = new StringBuilder();
         NodeList fragmentos = dato.getChildNodes();
 

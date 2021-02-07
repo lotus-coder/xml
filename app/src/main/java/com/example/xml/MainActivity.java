@@ -24,14 +24,14 @@ public class MainActivity extends AppCompatActivity {
         btnEjer1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, Ejercicio1Activity.class);
+                Intent i = new Intent(MainActivity.this, Ejer1Activity.class);
                 startActivity(i);
             }
         });
         btnEjer2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this,Ejercicio2Activity.class);
+                Intent i = new Intent(MainActivity.this, Ejer2Activity.class);
                 startActivity(i);
             }
         });

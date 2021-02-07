@@ -4,7 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Temporal {
+public class Tiempo {
 
 
     private Date fecha;
@@ -12,7 +12,7 @@ public class Temporal {
     private String estadocielo,dirviento;
 
 
-    public Temporal() {}
+    public Tiempo() {}
 
     public String getFecha() {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");

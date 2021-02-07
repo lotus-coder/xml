@@ -10,11 +10,11 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class Ejercicio2Activity extends AppCompatActivity {
+public class Ejer2Activity extends AppCompatActivity {
 
     public String url = "http://www.aemet.es/xml/municipios/localidad_01059.xml";
 
-    private List<Temporal> temporal;
+    private List<Tiempo> temporal;
 
     private Button btnHoy,btnManana,btnPasado;
 
@@ -93,7 +93,7 @@ public class Ejercicio2Activity extends AppCompatActivity {
             pClick = false;
         }
 
-        Temporal temporal;
+        Tiempo temporal;
         switch (view.getId()) {
             case R.id.btnManana:
                 temporal = this.temporal.get(1);

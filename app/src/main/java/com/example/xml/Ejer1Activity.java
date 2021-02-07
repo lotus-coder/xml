@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.List;
 
-public class Ejercicio1Activity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class Ejer1Activity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     public String url = "https://e00-marca.uecdn.es/rss/futbol/primera-division.xml";
 
@@ -50,15 +50,15 @@ public class Ejercicio1Activity extends AppCompatActivity implements AdapterView
             if (noticias != null) {
                 ntCs = new Noticia[noticias.size()];
                 ntCs = noticias.toArray(ntCs);
-                AdaptadorNoticias adaptador = new AdaptadorNoticias(Ejercicio1Activity.this, ntCs);
+                AdaptadorNoticias adaptador = new AdaptadorNoticias(Ejer1Activity.this, ntCs);
                 lista.setAdapter(adaptador);
-                lista.setOnItemClickListener(Ejercicio1Activity.this);
+                lista.setOnItemClickListener(Ejer1Activity.this);
             }
         }
     }
 
     public void onItemClick(AdapterView<?> parent, View view, int index, long arg3) {
-        AdaptadorNoticias adaptador = new AdaptadorNoticias(Ejercicio1Activity.this, ntCs);
+        AdaptadorNoticias adaptador = new AdaptadorNoticias(Ejer1Activity.this, ntCs);
         Noticia noticia = adaptador.getItem(index);
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(noticia.getEnlace()));
         startActivity(browserIntent);
