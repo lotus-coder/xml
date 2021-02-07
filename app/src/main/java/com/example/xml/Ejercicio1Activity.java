@@ -20,14 +20,14 @@ public class Ejercicio1Activity extends AppCompatActivity implements AdapterView
 
     private ListView lista;
     private List<Noticia> noticias;
-    private Noticia[] array;
+    private Noticia[] ntCs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ejer1);
 
-        lista = findViewById(R.id.listaNoticias);
+        lista = findViewById(R.id.lvNoticias);
 
     }
 
@@ -35,7 +35,7 @@ public class Ejercicio1Activity extends AppCompatActivity implements AdapterView
 
         TextView tv = findViewById(R.id.tvPulsar);
         tv.setVisibility(View.GONE);
-        Button b = findViewById(R.id.bCargar);
+        Button b = findViewById(R.id.btnCargar);
         b.setVisibility(View.GONE);
 
         //Carga del XML mediante tarea Asincrona
@@ -54,10 +54,10 @@ public class Ejercicio1Activity extends AppCompatActivity implements AdapterView
         protected void onPostExecute(Boolean result) {
             if (noticias != null) {
 
-                array = new Noticia[noticias.size()];
-                array = noticias.toArray(array);
+                ntCs = new Noticia[noticias.size()];
+                ntCs = noticias.toArray(ntCs);
 
-                AdaptadorNoticias adaptador = new AdaptadorNoticias(Ejercicio1Activity.this, array);
+                AdaptadorNoticias adaptador = new AdaptadorNoticias(Ejercicio1Activity.this, ntCs);
                 lista.setAdapter(adaptador);
 
                 lista.setOnItemClickListener(Ejercicio1Activity.this);
@@ -66,7 +66,7 @@ public class Ejercicio1Activity extends AppCompatActivity implements AdapterView
     }
 
     public void onItemClick(AdapterView<?> parent, View view, int index, long arg3) {
-        AdaptadorNoticias adaptador = new AdaptadorNoticias(Ejercicio1Activity.this, array);
+        AdaptadorNoticias adaptador = new AdaptadorNoticias(Ejercicio1Activity.this, ntCs);
         Noticia noticia = adaptador.getItem(index);
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(noticia.getEnlace()));
         startActivity(browserIntent);
