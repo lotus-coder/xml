@@ -16,11 +16,11 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-public class RssParserDOM {
+public class RssParserDOMNews {
 
     private URL rssURL;
 
-    public RssParserDOM(String url){
+    public RssParserDOMNews(String url){
         try{
             this.rssURL = new URL (url);
         } catch (MalformedURLException e) {
@@ -28,9 +28,9 @@ public class RssParserDOM {
         }
     }
 
-    public List<Noticia> parse() {
+    public List<New> parse() {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        List<Noticia> noticias = new ArrayList<Noticia>();
+        List<New> noticias = new ArrayList<New>();
 
         try {
             DocumentBuilder builder = factory.newDocumentBuilder();
@@ -41,8 +41,8 @@ public class RssParserDOM {
 
             NodeList items = root.getElementsByTagName("item");
 
-            for (int i=0; i<items.getLength(); i++){
-                Noticia noticia = new Noticia();
+            for (int i=0; i < items.getLength(); i++){
+                New noticia = new New();
 
                 Node item = items.item(i);
 
@@ -56,25 +56,16 @@ public class RssParserDOM {
                     if (etiqueta.equals("title")){
                         String texto = dameTexto(dato);
                         noticia.setTitulo(texto);
-                    }else if (etiqueta.equals("dc:creator")){
-                        String texto = dato.getFirstChild().getNodeValue();
-                        noticia.setAutor(texto);
                     }else if (etiqueta.equals("link")){
                         String texto = dato.getFirstChild().getNodeValue();
-                        noticia.setEnlace(texto);
-                    }else if (etiqueta.equals("category")){
+                        noticia.setLink(texto);
+                    }else if (etiqueta.equals("description")){
                         String texto = dato.getFirstChild().getNodeValue();
-                        if (categorias.equals("")) categorias=texto;
-                        else categorias+="###"+texto;
-                    }else if (etiqueta.equals("media:description")) {
-                        //Terminamos de tratar las categorias
-                        noticia.setCategoria(categorias.split("###"));
-                        categorias="";
-
-                        String texto = dameTexto(dato);
-                        noticia.setDescripcion(texto.replace("&lt;strong&gt;",""));
-                    }else if (etiqueta.equals("pubDate")) {
-                        noticia.setFecha(dato.getFirstChild().getNodeValue());
+                        noticia.setDescripcion(texto);
+                    }else if (etiqueta.equals("author")){
+                        if(dato.getFirstChild() != null){
+                        String texto = dato.getFirstChild().getNodeValue();
+                        noticia.setAutor(texto);}
                     }
                 }
                 noticias.add(noticia);

@@ -16,11 +16,11 @@ import java.util.List;
 
 public class Ejer1Activity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
-    public String url = "https://e00-marca.uecdn.es/rss/futbol/primera-division.xml";
+    public String url = "https://www.eldiario.es/rss/";
 
     private ListView lista;
-    private List<Noticia> noticias;
-    private Noticia[] ntCs;
+    private List<New> noticias;
+    private New[] ntCs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,16 +41,16 @@ public class Ejer1Activity extends AppCompatActivity implements AdapterView.OnIt
     private class CargarXmlTask extends AsyncTask<String,Integer,Boolean> {
 
         protected Boolean doInBackground(String... params) {
-            RssParserDOM domParser = new RssParserDOM(params[0]);
+            RssParserDOMNews domParser = new RssParserDOMNews(params[0]);
             noticias = domParser.parse();
             return true;
         }
 
         protected void onPostExecute(Boolean result) {
             if (noticias != null) {
-                ntCs = new Noticia[noticias.size()];
+                ntCs = new New[noticias.size()];
                 ntCs = noticias.toArray(ntCs);
-                AdaptadorNoticias adaptador = new AdaptadorNoticias(Ejer1Activity.this, ntCs);
+                AdaptadorNews adaptador = new AdaptadorNews(Ejer1Activity.this, ntCs);
                 lista.setAdapter(adaptador);
                 lista.setOnItemClickListener(Ejer1Activity.this);
             }
@@ -58,9 +58,9 @@ public class Ejer1Activity extends AppCompatActivity implements AdapterView.OnIt
     }
 
     public void onItemClick(AdapterView<?> parent, View view, int index, long arg3) {
-        AdaptadorNoticias adaptador = new AdaptadorNoticias(Ejer1Activity.this, ntCs);
-        Noticia noticia = adaptador.getItem(index);
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(noticia.getEnlace()));
+        AdaptadorNews adaptador = new AdaptadorNews(Ejer1Activity.this, ntCs);
+        New noticia = adaptador.getItem(index);
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(noticia.getLink()));
         startActivity(browserIntent);
     }
 }
