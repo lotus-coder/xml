@@ -33,21 +33,19 @@ class AdaptadorNoticias extends ArrayAdapter<Noticia> {
 
         TextView tvTitulo = item.findViewById(R.id.titulo);
         tvTitulo.setText(titulo);
-
         TextView tvAutor = item.findViewById(R.id.autor);
         tvAutor.setText("Por: "+autor);
-
         String categoria = "";
+
         for (int x=0;x<categorias.length;x++) {
             if (!categoria.equals("")) categoria += ", ";
             categoria+=categorias[x];
         }
+
         TextView tvCategoria = item.findViewById(R.id.categorias);
         tvCategoria.setText(categoria);
-
         TextView tvDescripcion = item.findViewById(R.id.descripcion);
         tvDescripcion.setText(descripcion);
-
         TextView tvFecha = item.findViewById(R.id.fecha);
         tvFecha.setText(", a "+fecha);
 

@@ -26,19 +26,14 @@ public class Ejercicio1Activity extends AppCompatActivity implements AdapterView
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ejer1);
-
         lista = findViewById(R.id.lvNoticias);
-
     }
 
     public void cargarXMLConDOM(View v){
-
         TextView tv = findViewById(R.id.tvPulsar);
         tv.setVisibility(View.GONE);
         Button b = findViewById(R.id.btnCargar);
         b.setVisibility(View.GONE);
-
-        //Carga del XML mediante tarea Asincrona
         CargarXmlTask tarea = new CargarXmlTask();
         tarea.execute(url);
     }
@@ -53,13 +48,10 @@ public class Ejercicio1Activity extends AppCompatActivity implements AdapterView
 
         protected void onPostExecute(Boolean result) {
             if (noticias != null) {
-
                 ntCs = new Noticia[noticias.size()];
                 ntCs = noticias.toArray(ntCs);
-
                 AdaptadorNoticias adaptador = new AdaptadorNoticias(Ejercicio1Activity.this, ntCs);
                 lista.setAdapter(adaptador);
-
                 lista.setOnItemClickListener(Ejercicio1Activity.this);
             }
         }

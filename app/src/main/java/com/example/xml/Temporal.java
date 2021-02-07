@@ -6,16 +6,11 @@ import java.util.Date;
 
 public class Temporal {
 
-    //root -> prediccion -> dia...
+
     private Date fecha;
-    private int precipitacion;  //prob_precipitacion
-    private int cotanieve;      //cota_nieve_prov
-    private String estadocielo; //estado_cielo@descripcion
-    private String dirviento;   //viento -> direccion
-    private int fuerzaviento;   //viento -> velocidad
-    private int rachamax;       //racha_max
-    private int tempmin;        //temperatura -> minima
-    private int tempmax;        //temperatura -> maxima
+    private int precipitacion,tempmax,tempmin,cotanieve,fuerzaviento,rachamax;
+    private String estadocielo,dirviento;
+
 
     public Temporal() {}
 
@@ -33,20 +28,21 @@ public class Temporal {
         }
     }
 
-    public int getPrecipitacion() {
-        return precipitacion;
-    }
-
-    public void setPrecipitacion(int precipitacion) {
-        this.precipitacion = precipitacion;
-    }
-
     public int getCotanieve() {
         return cotanieve;
     }
 
     public void setCotanieve(int cotanieve) {
         this.cotanieve = cotanieve;
+    }
+
+
+    public int getPrecipitacion() {
+        return precipitacion;
+    }
+
+    public void setPrecipitacion(int precipitacion) {
+        this.precipitacion = precipitacion;
     }
 
     public String getEstadocielo() {
@@ -63,20 +59,20 @@ public class Temporal {
 
     public void setDirviento(String dirviento) {
         switch (dirviento) {
-            case "N":
-                this.dirviento = "Norte";
-                break;
             case "E":
                 this.dirviento = "Este";
+                break;
+            case "N":
+                this.dirviento = "Norte";
                 break;
             case "O":
                 this.dirviento = "Oeste";
                 break;
-            case "S":
-                this.dirviento = "Sur";
-                break;
             case "SE":
                 this.dirviento = "Sureste";
+                break;
+            case "S":
+                this.dirviento = "Sur";
                 break;
             case "SO":
                 this.dirviento = "Suroeste";

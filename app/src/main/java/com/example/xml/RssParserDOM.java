@@ -29,41 +29,32 @@ public class RssParserDOM {
     }
 
     public List<Noticia> parse() {
-        //Instanciamos la fabrica para DOM
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         List<Noticia> noticias = new ArrayList<Noticia>();
 
         try {
-            //Creamos un nuevo parser DOM
             DocumentBuilder builder = factory.newDocumentBuilder();
 
-            //Realizamos la lectura completa del XML
             Document dom = builder.parse(this.getInputStream());
 
-            //Nos posicionamos en el nodo principal del árbol (<rss>)
             Element root = dom.getDocumentElement();
 
-            //Localizamos todos los elemntos <item>
             NodeList items = root.getElementsByTagName("item");
 
-            //Recorremos la lista de noticias
             for (int i=0; i<items.getLength(); i++){
                 Noticia noticia = new Noticia();
 
-                //Obtenemos la noticia actual
                 Node item = items.item(i);
 
-                //Obtenemos la lista de datos de la noticia actual
                 NodeList datosNoticia = item.getChildNodes();
 
-                //Procesamos cada dato de la noticia
                 String categorias = "";
                 for (int j=0; j<datosNoticia.getLength(); j++){
                     Node dato = datosNoticia.item(j);
                     String etiqueta = dato.getNodeName();
 
                     if (etiqueta.equals("title")){
-                        String texto = obtenerTexto(dato);
+                        String texto = dameTexto(dato);
                         noticia.setTitulo(texto);
                     }else if (etiqueta.equals("dc:creator")){
                         String texto = dato.getFirstChild().getNodeValue();
@@ -80,13 +71,12 @@ public class RssParserDOM {
                         noticia.setCategoria(categorias.split("###"));
                         categorias="";
 
-                        String texto = obtenerTexto(dato);
+                        String texto = dameTexto(dato);
                         noticia.setDescripcion(texto.replace("&lt;strong&gt;",""));
                     }else if (etiqueta.equals("pubDate")) {
                         noticia.setFecha(dato.getFirstChild().getNodeValue());
                     }
                 }
-
                 noticias.add(noticia);
             }
 
@@ -100,7 +90,7 @@ public class RssParserDOM {
 
     }
 
-    public String obtenerTexto (Node dato) {
+    public String dameTexto (Node dato) {
         StringBuilder texto = new StringBuilder();
         NodeList fragmentos = dato.getChildNodes();
 

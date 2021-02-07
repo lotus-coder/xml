@@ -20,7 +20,7 @@ public class Ejercicio2Activity extends AppCompatActivity {
 
     private TextView txtFecha,txtPrecipitacion,txtCotanieve,txtCielo,txtDirviento,txtRacha,txtRachamax,txtMin,txtMax,txtMostrar;
 
-    private boolean primerclick;
+    private boolean pClick;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +43,7 @@ public class Ejercicio2Activity extends AppCompatActivity {
 
         txtMostrar = findViewById(R.id.tvMostrar);
 
-        primerclick = true;
+        pClick = true;
 
         CargaXmlTask tarea = new CargaXmlTask();
         tarea.execute(url);
@@ -51,7 +51,6 @@ public class Ejercicio2Activity extends AppCompatActivity {
     }
 
     public void cargarXMLConDOM(View v) {
-        //Carga del XML mediante tarea Asincrona
         CargaXmlTask tarea = new CargaXmlTask();
         tarea.execute(url);
     }
@@ -78,7 +77,7 @@ public class Ejercicio2Activity extends AppCompatActivity {
     }
 
     public void cargarDatos(View view) {
-        if (primerclick) {
+        if (pClick) {
             txtMostrar.setVisibility(View.GONE);
 
             txtFecha.setVisibility(View.VISIBLE);
@@ -91,7 +90,7 @@ public class Ejercicio2Activity extends AppCompatActivity {
             txtMin.setVisibility(View.VISIBLE);
             txtMax.setVisibility(View.VISIBLE);
 
-            primerclick = false;
+            pClick = false;
         }
 
         Temporal temporal;

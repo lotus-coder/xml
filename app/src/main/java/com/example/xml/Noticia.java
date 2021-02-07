@@ -1,25 +1,23 @@
 package com.example.xml;
 
+import java.util.Arrays;
+
 public class Noticia {
 
-    private String titulo;      //title
-    private String autor;       //dc:creator
-    private String enlace;      //link
-    private String[] categoria; //category
-    private String descripcion; //media:description
-    private String fecha;       //pubDate
+    private String descripcion,enlace,autor,fecha,titulo;
+    private String[] categoria;
 
-    public Noticia() {}
 
-    public Noticia(String titulo,String autor,String enlace,
-                   String[] categoria,String descripcion,String fecha) {
-
+    public Noticia(String titulo,String autor,String enlace,String[] categoria,String descripcion,String fecha) {
         this.titulo = titulo;
         this.autor = autor;
         this.enlace = enlace;
         this.categoria = categoria;
         this.descripcion = descripcion;
         this.fecha = fecha;
+    }
+    public Noticia(){
+
     }
 
     public String getTitulo() {
@@ -68,5 +66,17 @@ public class Noticia {
 
     public void setFecha(String fecha) {
         this.fecha = fecha;
+    }
+
+    @Override
+    public String toString() {
+        return "Noticia{" +
+                "titulo='" + titulo + '\'' +
+                ", autor='" + autor + '\'' +
+                ", enlace='" + enlace + '\'' +
+                ", categoria=" + Arrays.toString(categoria) +
+                ", descripcion='" + descripcion + '\'' +
+                ", fecha='" + fecha + '\'' +
+                '}';
     }
 }

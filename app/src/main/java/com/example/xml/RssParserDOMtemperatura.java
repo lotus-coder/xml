@@ -40,32 +40,24 @@ public class RssParserDOMtemperatura {
             Document dom = builder.parse(this.getInputStream());
             Element root = dom.getDocumentElement();
 
-            //Localizamos todos los elemntos <dia>
             NodeList items = root.getElementsByTagName("dia");
 
             for (int i=0; i<items.getLength(); i++){
                 Temporal temporal = new Temporal();
                 temporal.setCotanieve(-1);
 
-                //ETIQUETA DIA
                 Node dia = items.item(i);
 
-                //OBTENER ATRIBUTO FECHA
                 NamedNodeMap fecha = dia.getAttributes();
                 temporal.setFecha(fecha.getNamedItem("fecha").getNodeValue());
 
-                //OBTENEMOS LOS DATOS DE DIA
                 NodeList datosTemporal = dia.getChildNodes();
 
-                //RECORREMOS CADA ELEMENTO
                 for (int j=0; j<datosTemporal.getLength(); j++){
-                    //OBTENER NOMBRE ETIQUETA
                     Node dato = datosTemporal.item(j);
                     String etiqueta = dato.getNodeName();
 
-                    //OBTENER VALOR ATRIBUTO
                     NamedNodeMap atributos = dato.getAttributes();
-                    //String atributo = atributos.getNamedItem("periodo").getNodeValue();
 
                     if (etiqueta.equals("prob_precipitacion")) {
                         String texto = obtenerTexto(dato);
