@@ -16,9 +16,9 @@ public class Ejercicio2Activity extends AppCompatActivity {
 
     private List<Temporal> temporal;
 
-    private Button hoy,manana,pasado;
+    private Button btnHoy,btnManana,btnPasado;
 
-    private TextView fecha,precipitacion,cotanieve,cielo,dirviento,racha,rachamax,min,max,mostrar;
+    private TextView txtFecha,txtPrecipitacion,txtCotanieve,txtCielo,txtDirviento,txtRacha,txtRachamax,txtMin,txtMax,txtMostrar;
 
     private boolean primerclick;
 
@@ -27,36 +27,36 @@ public class Ejercicio2Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ejer2);
 
-        hoy = findViewById(R.id.bHoy);
-        manana = findViewById(R.id.bManana);
-        pasado = findViewById(R.id.bPasado);
+        btnHoy = findViewById(R.id.btnHoy);
+        btnManana = findViewById(R.id.btnManana);
+        btnPasado = findViewById(R.id.btnPasado);
 
-        fecha = findViewById(R.id.tvFecha);
-        precipitacion = findViewById(R.id.tvPrecipitacion);
-        cotanieve = findViewById(R.id.tvCotanieve);
-        cielo = findViewById(R.id.tvCielo);
-        dirviento = findViewById(R.id.tvDir);
-        racha = findViewById(R.id.tvRacha);
-        rachamax = findViewById(R.id.tvRachamax);
-        min = findViewById(R.id.tvMin);
-        max = findViewById(R.id.tvMax);
+        txtFecha = findViewById(R.id.tvFecha);
+        txtPrecipitacion = findViewById(R.id.tvPrecipitacion);
+        txtCotanieve = findViewById(R.id.tvCotanieve);
+        txtCielo = findViewById(R.id.tvCielo);
+        txtDirviento = findViewById(R.id.tvDir);
+        txtRacha = findViewById(R.id.tvRacha);
+        txtRachamax = findViewById(R.id.tvRachamax);
+        txtMin = findViewById(R.id.tvMin);
+        txtMax = findViewById(R.id.tvMax);
 
-        mostrar = findViewById(R.id.tvMostrar);
+        txtMostrar = findViewById(R.id.tvMostrar);
 
         primerclick = true;
 
-        CargarXmlTask tarea = new CargarXmlTask();
+        CargaXmlTask tarea = new CargaXmlTask();
         tarea.execute(url);
 
     }
 
     public void cargarXMLConDOM(View v) {
         //Carga del XML mediante tarea Asincrona
-        CargarXmlTask tarea = new CargarXmlTask();
+        CargaXmlTask tarea = new CargaXmlTask();
         tarea.execute(url);
     }
 
-    private class CargarXmlTask extends AsyncTask<String,Integer,Boolean> {
+    private class CargaXmlTask extends AsyncTask<String,Integer,Boolean> {
 
         protected Boolean doInBackground(String... params) {
             RssParserDOMtemperatura domParser = new RssParserDOMtemperatura(params[0]);
@@ -69,9 +69,9 @@ public class Ejercicio2Activity extends AppCompatActivity {
 
                 int lon = temporal.size();
 
-                if (lon>=1) hoy.setEnabled(true);
-                if (lon>=2) manana.setEnabled(true);
-                if (lon>=3) pasado.setEnabled(true);
+                if (lon>=1) btnHoy.setEnabled(true);
+                if (lon>=2) btnManana.setEnabled(true);
+                if (lon>=3) btnPasado.setEnabled(true);
 
             }
         }
@@ -79,41 +79,41 @@ public class Ejercicio2Activity extends AppCompatActivity {
 
     public void cargarDatos(View view) {
         if (primerclick) {
-            mostrar.setVisibility(View.GONE);
+            txtMostrar.setVisibility(View.GONE);
 
-            fecha.setVisibility(View.VISIBLE);
-            precipitacion.setVisibility(View.VISIBLE);
-            cotanieve.setVisibility(View.VISIBLE);
-            cielo.setVisibility(View.VISIBLE);
-            dirviento.setVisibility(View.VISIBLE);
-            racha.setVisibility(View.VISIBLE);
-            rachamax.setVisibility(View.VISIBLE);
-            min.setVisibility(View.VISIBLE);
-            max.setVisibility(View.VISIBLE);
+            txtFecha.setVisibility(View.VISIBLE);
+            txtPrecipitacion.setVisibility(View.VISIBLE);
+            txtCotanieve.setVisibility(View.VISIBLE);
+            txtCielo.setVisibility(View.VISIBLE);
+            txtDirviento.setVisibility(View.VISIBLE);
+            txtRacha.setVisibility(View.VISIBLE);
+            txtRachamax.setVisibility(View.VISIBLE);
+            txtMin.setVisibility(View.VISIBLE);
+            txtMax.setVisibility(View.VISIBLE);
 
             primerclick = false;
         }
 
         Temporal temporal;
         switch (view.getId()) {
-            case R.id.bManana:
+            case R.id.btnManana:
                 temporal = this.temporal.get(1);
                 break;
-            case R.id.bPasado:
+            case R.id.btnPasado:
                 temporal = this.temporal.get(2);
                 break;
             default:
                 temporal = this.temporal.get(0);
         }
-        fecha.setText(getResources().getString(R.string.fecha)+" "+temporal.getFecha());
-        precipitacion.setText(getResources().getString(R.string.precipitacion)+" "+temporal.getPrecipitacion()+"%");
-        cotanieve.setText(getResources().getString(R.string.cotanieve)+" "+temporal.getCotanieve());
-        cielo.setText(getResources().getString(R.string.cielo)+" "+temporal.getEstadocielo());
-        dirviento.setText(getResources().getString(R.string.dirviento)+" "+temporal.getDirviento());
-        racha.setText(getResources().getString(R.string.racha)+" "+temporal.getFuerzaviento());
-        rachamax.setText(getResources().getString(R.string.rachamax)+" "+temporal.getRachamax());
-        min.setText(getResources().getString(R.string.min)+" "+temporal.getTempmin());
-        max.setText(getResources().getString(R.string.max)+" "+temporal.getTempmax());
+        txtFecha.setText(getResources().getString(R.string.fecha)+" "+temporal.getFecha());
+        txtPrecipitacion.setText(getResources().getString(R.string.precipitacion)+" "+temporal.getPrecipitacion()+"%");
+        txtCotanieve.setText(getResources().getString(R.string.cotanieve)+" "+temporal.getCotanieve());
+        txtCielo.setText(getResources().getString(R.string.cielo)+" "+temporal.getEstadocielo());
+        txtDirviento.setText(getResources().getString(R.string.dirviento)+" "+temporal.getDirviento());
+        txtRacha.setText(getResources().getString(R.string.racha)+" "+temporal.getFuerzaviento());
+        txtRachamax.setText(getResources().getString(R.string.rachamax)+" "+temporal.getRachamax());
+        txtMin.setText(getResources().getString(R.string.min)+" "+temporal.getTempmin());
+        txtMax.setText(getResources().getString(R.string.max)+" "+temporal.getTempmax());
 
     }
 }
