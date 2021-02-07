@@ -17,11 +17,11 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-public class RssParserDOMtemperatura {
+public class RssParserDOMTiempo {
 
     private URL rssURL;
 
-    public RssParserDOMtemperatura(String url){
+    public RssParserDOMTiempo(String url){
         try{
             this.rssURL = new URL (url);
         } catch (MalformedURLException e) {

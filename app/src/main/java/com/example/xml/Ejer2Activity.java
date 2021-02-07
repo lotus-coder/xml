@@ -58,7 +58,7 @@ public class Ejer2Activity extends AppCompatActivity {
     private class CargaXmlTask extends AsyncTask<String,Integer,Boolean> {
 
         protected Boolean doInBackground(String... params) {
-            RssParserDOMtemperatura domParser = new RssParserDOMtemperatura(params[0]);
+            RssParserDOMTiempo domParser = new RssParserDOMTiempo(params[0]);
             temporal = domParser.parse();
             return true;
         }
